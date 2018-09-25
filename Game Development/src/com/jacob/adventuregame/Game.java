@@ -31,7 +31,7 @@ public class Game extends Canvas implements  Runnable{
         screen = new Screen(width, height);
         frame = new JFrame();
         key = new Keyboard();
-        frame.addKeyListener(key);
+        addKeyListener(key);
     }
 
     public synchronized void start() {
@@ -56,6 +56,7 @@ public class Game extends Canvas implements  Runnable{
         double delta = 0;
         int frames = 0;
         int updates = 0;
+        requestFocus();
         while (running) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -84,8 +85,10 @@ public class Game extends Canvas implements  Runnable{
     int x=0, y=0;
     private void update(){
         key.update();
-        x++;
-        y++;
+        if (key.up) y--;
+        if (key.down) y++;
+        if (key.left) x--;
+        if (key.right) x++;
     }
 
     private void render() {
