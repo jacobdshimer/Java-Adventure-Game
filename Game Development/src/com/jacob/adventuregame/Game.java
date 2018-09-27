@@ -1,5 +1,6 @@
 package com.jacob.adventuregame;
 
+import com.jacob.adventuregame.entity.mob.Player;
 import com.jacob.adventuregame.graphics.Screen;
 import com.jacob.adventuregame.input.Keyboard;
 import com.jacob.adventuregame.level.Level;
@@ -24,6 +25,7 @@ public class Game extends Canvas implements  Runnable{
     private Screen screen;
     private Keyboard key;
     private Level level;
+    private Player player;
 
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -31,10 +33,12 @@ public class Game extends Canvas implements  Runnable{
     public Game() {
         Dimension size = new Dimension(width * scale, height * scale);
         setPreferredSize(size);
+
         screen = new Screen(width, height);
         frame = new JFrame();
         key = new Keyboard();
         level = new RandomLevel(64, 64);
+        player = new Player(key);
 
         addKeyListener(key);
     }
@@ -87,13 +91,9 @@ public class Game extends Canvas implements  Runnable{
         stop();
     }
 
-    int x=0, y=0;
     private void update(){
         key.update();
-        if (key.up) y--;
-        if (key.down) y++;
-        if (key.left) x--;
-        if (key.right) x++;
+        player.update();
     }
 
     private void render() {
@@ -104,7 +104,10 @@ public class Game extends Canvas implements  Runnable{
         }
 
         screen.clear();
-        level.render(x, y, screen);
+        int xScroll = player.x - (screen.width/2);
+        int yScroll = player.y - (screen.height/2);
+        level.render(xScroll, yScroll, screen);
+        player.render(screen);
 
         for (int i = 0; i < pixels.length; i++) {
             pixels[i] = screen.pixels[i];
@@ -112,6 +115,10 @@ public class Game extends Canvas implements  Runnable{
 
         Graphics g = bs.getDrawGraphics();
         g.drawImage(image,0,0,getWidth(),getHeight(),null);
+         //Movement Debugging
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Verdana", 0, 50));
+        g.drawString("X: " + player.x + ", Y: " + player.y, 350, 400);
         g.dispose();
         bs.show();
     }

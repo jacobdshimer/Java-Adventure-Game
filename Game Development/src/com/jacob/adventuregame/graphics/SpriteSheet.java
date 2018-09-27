@@ -10,6 +10,7 @@ public class SpriteSheet {
     public int[] pixels;
 
     public static SpriteSheet outside = new SpriteSheet("/textures/city/citytiles.png", 256);
+    public static SpriteSheet chracters = new SpriteSheet("/textures/characters/characters_transparent.png", 256);
 
     public SpriteSheet(String path, int size) {
         this.path = path;
