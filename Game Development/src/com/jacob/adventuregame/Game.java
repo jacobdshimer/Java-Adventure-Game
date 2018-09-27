@@ -5,6 +5,7 @@ import com.jacob.adventuregame.graphics.Screen;
 import com.jacob.adventuregame.input.Keyboard;
 import com.jacob.adventuregame.level.Level;
 import com.jacob.adventuregame.level.RandomLevel;
+import com.jacob.adventuregame.level.SpawnLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,8 +38,8 @@ public class Game extends Canvas implements  Runnable{
         screen = new Screen(width, height);
         frame = new JFrame();
         key = new Keyboard();
-        level = new RandomLevel(64, 64);
-        player = new Player(key);
+        level = new SpawnLevel("/textures/levels/spawn.png");
+        player = new Player(7*16,7*16,key);
 
         addKeyListener(key);
     }
@@ -115,10 +116,10 @@ public class Game extends Canvas implements  Runnable{
 
         Graphics g = bs.getDrawGraphics();
         g.drawImage(image,0,0,getWidth(),getHeight(),null);
-         //Movement Debugging
-        g.setColor(Color.WHITE);
+        //Movement Debugging
+        /*g.setColor(Color.WHITE);
         g.setFont(new Font("Verdana", 0, 50));
-        g.drawString("X: " + player.x + ", Y: " + player.y, 350, 400);
+        g.drawString("X: " + player.x + ", Y: " + player.y, 350, 400);*/
         g.dispose();
         bs.show();
     }

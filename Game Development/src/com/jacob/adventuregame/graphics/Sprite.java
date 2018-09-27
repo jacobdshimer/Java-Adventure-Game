@@ -7,14 +7,27 @@ public class Sprite {
     private SpriteSheet sheet;
 
     public static Sprite grass = new Sprite(16,0,3,SpriteSheet.outside);
+    public static Sprite flower = new Sprite(16, 0, 9, SpriteSheet.outside);
+    public static Sprite rock = new Sprite(16, 1, 9, SpriteSheet.outside);
     public static Sprite street = new Sprite(16, 3,0, SpriteSheet.outside);
     public static Sprite dirt = new Sprite(16, 0, 5, SpriteSheet.outside);
     public static Sprite sand = new Sprite(16, 0, 6, SpriteSheet.outside);
 
-    public static Sprite player0 = new Sprite(16, 3, 1, SpriteSheet.chracters);
-    public static Sprite player1 = new Sprite(16, 1, 1, SpriteSheet.chracters);
-    public static Sprite player2 = new Sprite(16, 7, 1, SpriteSheet.chracters);
-    public static Sprite player3 = new Sprite(16, 5, 1, SpriteSheet.chracters);
+    public static Sprite player_BACK = new Sprite(16, 9, 0, SpriteSheet.chracters);
+    public static Sprite player_BACK_1 = new Sprite(16, 9, 1, SpriteSheet.chracters);
+    public static Sprite player_BACK_2 = new Sprite(16, 9, 2, SpriteSheet.chracters);
+
+    public static Sprite player_FRONT= new Sprite(16, 8, 0, SpriteSheet.chracters);
+    public static Sprite player_FRONT_1= new Sprite(16, 8, 1, SpriteSheet.chracters);
+    public static Sprite player_FRONT_2= new Sprite(16, 8, 2, SpriteSheet.chracters);
+
+    public static Sprite player_SIDE = new Sprite(16, 10, 0,SpriteSheet.chracters);
+    public static Sprite player_SIDE_1 = new Sprite(16, 10, 1,SpriteSheet.chracters);
+    public static Sprite player_SIDE_2 = new Sprite(16, 10, 2,SpriteSheet.chracters);
+
+
+
+
 
     public static Sprite voidSprite = new Sprite(16, 0x1B87E0);
 
