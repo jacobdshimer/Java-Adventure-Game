@@ -4,8 +4,8 @@ import com.jacob.adventuregame.entity.mob.Player;
 import com.jacob.adventuregame.graphics.Screen;
 import com.jacob.adventuregame.input.Keyboard;
 import com.jacob.adventuregame.level.Level;
-import com.jacob.adventuregame.level.RandomLevel;
 import com.jacob.adventuregame.level.SpawnLevel;
+import com.jacob.adventuregame.level.TileCoordinate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,8 +38,10 @@ public class Game extends Canvas implements  Runnable{
         screen = new Screen(width, height);
         frame = new JFrame();
         key = new Keyboard();
-        level = new SpawnLevel("/textures/levels/spawn.png");
-        player = new Player(7*16,7*16,key);
+        level = Level.spawn;
+        TileCoordinate playerSpawn = new TileCoordinate(20, 22);
+        player = new Player(playerSpawn.x(), playerSpawn.y(),key);
+        player.init(level);
 
         addKeyListener(key);
     }

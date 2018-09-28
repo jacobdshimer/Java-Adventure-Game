@@ -25,43 +25,30 @@ public class Sprite {
     public static Sprite player_SIDE_1 = new Sprite(16, 10, 1,SpriteSheet.chracters);
     public static Sprite player_SIDE_2 = new Sprite(16, 10, 2,SpriteSheet.chracters);
 
-
-    //Level One
-//    x1y1 C08C5A
-    public static Sprite x1y1 = new Sprite(16,1,1,SpriteSheet.outside);
-//    x0y3 B48355
-    public static Sprite x0y3 = new Sprite(16,0,3,SpriteSheet.outside);
-//    x1y3 B48345
-    public static Sprite x1y3 = new Sprite(16,1,3,SpriteSheet.outside);
-//    x0y1 B48335
-    public static Sprite x0y1 = new Sprite(16,0,1,SpriteSheet.outside);
-//    x0y2 B48325
-    public static Sprite x0y2 = new Sprite(16,0,2,SpriteSheet.outside);
-//    x0y4 0C8325
-    public static Sprite x0y4 = new Sprite(16,0,4,SpriteSheet.outside);
-//    x1y7 C08C4A
-    public static Sprite x1y7 = new Sprite(16,1,7,SpriteSheet.outside);
-//    x0y7 C08C3A
-    public static Sprite x0y7 = new Sprite(16,0,7,SpriteSheet.outside);
-//    x0y6 C08C2A
-    public static Sprite x0y6 = new Sprite(16,0,6,SpriteSheet.outside);
-//    x3y7 C08C1A
-    public static Sprite x3y7 = new Sprite(16,3,7,SpriteSheet.outside);
-//    x2y7 C08C0A
-    public static Sprite x2y7 = new Sprite(16,2,7,SpriteSheet.outside);
-//    x4y7 C07C0A
-    public static Sprite x4y7 = new Sprite(16,4,7,SpriteSheet.outside);
-//    x4y6 C06C0A
-    public static Sprite x4y6 = new Sprite(16,4,6,SpriteSheet.outside);
-//    x0y5 C05C0A
-    public static Sprite x0y5 = new Sprite(16,0,5,SpriteSheet.outside);
-//    x1y5 C04C0A
-    public static Sprite x1y5 = new Sprite(16,1,5,SpriteSheet.outside);
-//    x3y2 C03C0A
-    public static Sprite x3y2 = new Sprite(16,3,2,SpriteSheet.outside);
+    //Spawn Assets
+    //FF409C62
+    public static Sprite spawn_grass = new Sprite(16,0,0,SpriteSheet.spawn_assets);
+    //FFB48355
+    public static Sprite spawn_dirt = new Sprite(16,1,0,SpriteSheet.spawn_assets);
+    //FF9DAAAB
+    public static Sprite spawn_grey_brick_road_01 = new Sprite(16,2,0,SpriteSheet.spawn_assets);
+    //FF94A1A2
+    public static Sprite spawn_grey_brick_road_02 = new Sprite(16,2,3,SpriteSheet.spawn_assets);
+    //FF7F8286
+    public static Sprite spawn_grey_wall_01 = new Sprite(16,0,1,SpriteSheet.spawn_assets);
+    public static Sprite spawn_grey_wall_02 = new Sprite(16,0,3,SpriteSheet.spawn_assets);
+    public static Sprite spawn_red_wall_01 = new Sprite(16,1,1,SpriteSheet.spawn_assets);
+    public static Sprite spawn_red_wall_02 = new Sprite(16,1,3,SpriteSheet.spawn_assets);
+    //FF695333
+    public static Sprite spawn_wood_floor_01 = new Sprite(16,0,2,SpriteSheet.spawn_assets);
+    public static Sprite spawn_wood_floor_02 = new Sprite(16,1,2,SpriteSheet.spawn_assets);
+    public static Sprite spawn_plain_wall = new Sprite(16,2,1,SpriteSheet.spawn_assets);
+    //FF20500A
+    public static Sprite spawn_hedge = new Sprite(16,2,2,SpriteSheet.spawn_assets);
 
 
 
+    //Void Sprite
     public static Sprite voidSprite = new Sprite(16, 0x1B87E0);
 
     public Sprite (int size, int x, int y, SpriteSheet sheet){
