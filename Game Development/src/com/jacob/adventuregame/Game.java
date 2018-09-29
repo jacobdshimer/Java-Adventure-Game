@@ -2,9 +2,10 @@ package com.jacob.adventuregame;
 
 import com.jacob.adventuregame.entity.mob.Player;
 import com.jacob.adventuregame.graphics.Screen;
+import com.jacob.adventuregame.graphics.Sprite;
 import com.jacob.adventuregame.input.Keyboard;
+import com.jacob.adventuregame.input.Mouse;
 import com.jacob.adventuregame.level.Level;
-import com.jacob.adventuregame.level.SpawnLevel;
 import com.jacob.adventuregame.level.TileCoordinate;
 
 import javax.swing.*;
@@ -15,9 +16,9 @@ import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements  Runnable{
     // Display settings
-    public static int width = 300;
-    public static int height = width / 16 * 9;
-    public static int scale = 3;
+    private static int width = 300;
+    private static int height = width / 16 * 9;
+    private static int scale = 3;
     public static String title = "Adventure Game";
 
     private Thread gameThread;
@@ -25,6 +26,7 @@ public class Game extends Canvas implements  Runnable{
     private boolean running = false;
     private Screen screen;
     private Keyboard key;
+    private Mouse mouse;
     private Level level;
     private Player player;
 
@@ -38,12 +40,23 @@ public class Game extends Canvas implements  Runnable{
         screen = new Screen(width, height);
         frame = new JFrame();
         key = new Keyboard();
+        mouse = new Mouse();
         level = Level.spawn;
         TileCoordinate playerSpawn = new TileCoordinate(20, 22);
         player = new Player(playerSpawn.x(), playerSpawn.y(),key);
         player.init(level);
 
         addKeyListener(key);
+        addMouseListener(mouse);
+        addMouseMotionListener(mouse);
+    }
+
+    public static int getWindowWidth(){
+        return width * scale;
+    }
+
+    public static int getWindowHeight() {
+        return height * scale;
     }
 
     public synchronized void start() {
@@ -97,6 +110,7 @@ public class Game extends Canvas implements  Runnable{
     private void update(){
         key.update();
         player.update();
+        level.update();
     }
 
     private void render() {
@@ -112,6 +126,9 @@ public class Game extends Canvas implements  Runnable{
         level.render(xScroll, yScroll, screen);
         player.render(screen);
 
+        Sprite sprite = new Sprite(80, 80, 0xFF0F0F);
+        screen.renderSprite(0, 0, sprite, false);
+
         for (int i = 0; i < pixels.length; i++) {
             pixels[i] = screen.pixels[i];
         }
@@ -119,9 +136,12 @@ public class Game extends Canvas implements  Runnable{
         Graphics g = bs.getDrawGraphics();
         g.drawImage(image,0,0,getWidth(),getHeight(),null);
         //Movement Debugging
-        /*g.setColor(Color.WHITE);
-        g.setFont(new Font("Verdana", 0, 50));
-        g.drawString("X: " + player.x + ", Y: " + player.y, 350, 400);*/
+//        g.setColor(Color.WHITE);
+//        g.setFont(new Font("Verdana", 0, 50));
+//        g.drawString("X: " + player.x + ", Y: " + player.y, 350, 400);
+//        g.fillRect(Mouse.getX()-32, Mouse.getY()-32, 64, 64);
+//        if (Mouse.getButton()!=-1) g.drawString("Button: " + Mouse.getButton(), 80,80 );
+
         g.dispose();
         bs.show();
     }

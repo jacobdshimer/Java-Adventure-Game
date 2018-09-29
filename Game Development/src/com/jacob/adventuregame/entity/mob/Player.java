@@ -1,8 +1,12 @@
 package com.jacob.adventuregame.entity.mob;
 
+import com.jacob.adventuregame.Game;
+import com.jacob.adventuregame.entity.projectile.Projectile;
+import com.jacob.adventuregame.entity.projectile.WizardProjectile;
 import com.jacob.adventuregame.graphics.Screen;
 import com.jacob.adventuregame.graphics.Sprite;
 import com.jacob.adventuregame.input.Keyboard;
+import com.jacob.adventuregame.input.Mouse;
 
 public class Player extends Mob{
 
@@ -10,21 +14,25 @@ public class Player extends Mob{
     private Keyboard input;
     private int anim = 0;
     private boolean walking = false;
+    private int fireRate = 0;
 
     public Player(Keyboard input){
         this.sprite = Sprite.player_BACK;
+        fireRate = WizardProjectile.FIRE_RATE;
         this.input = input;
     }
 
     //Spawn player at a specific location
     public Player(int x, int y, Keyboard input){
         this.sprite = Sprite.player_BACK;
+        fireRate = WizardProjectile.FIRE_RATE;
         this.input = input;
         this.x = x;
         this.y = y;
     }
 
     public void update(){
+        if (fireRate > 0) fireRate--;
         int xa = 0, ya = 0;
 
         if (anim < 7500) {
@@ -37,12 +45,30 @@ public class Player extends Mob{
         if (input.down) ya++;
         if (input.left) xa--;
         if (input.right) xa++;
-
         if (xa != 0 || ya != 0) {
             walking = true;
             move(xa, ya);
         } else {
             walking = false;
+        }
+        clear();
+        updateShooting();
+    }
+
+    private void clear() {
+        for (int i = 0; i < level.getProjectiles().size(); i++) {
+            Projectile p = level.getProjectiles().get(i);
+            if (p.isRemoved()) level.getProjectiles().remove(i);
+        }
+    }
+
+    private void updateShooting(){
+        if (Mouse.getButton() == 1 && fireRate <= 0) {
+            double dx = Mouse.getX() - Game.getWindowWidth() / 2;
+            double dy = Mouse.getY() - Game.getWindowHeight() / 2;
+            double dir = Math.atan2(dy, dx);
+            shoot(x, y, dir);
+            fireRate = WizardProjectile.FIRE_RATE;
         }
     }
 

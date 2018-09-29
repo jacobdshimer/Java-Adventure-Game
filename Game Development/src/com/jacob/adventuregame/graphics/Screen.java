@@ -1,5 +1,6 @@
 package com.jacob.adventuregame.graphics;
 
+import com.jacob.adventuregame.entity.projectile.Projectile;
 import com.jacob.adventuregame.level.tile.Tile;
 
 import java.util.Random;
@@ -29,6 +30,20 @@ public class Screen {
         }
     }
 
+    public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed) {
+        if (fixed) {
+            xp -= xOffset;
+            yp -= yOffset;
+        }
+        for (int y = 0; y < sprite.getHeight(); y++){
+            int ya = y + yp;
+            for (int x = 0; x < sprite.getWidth(); x++){
+                int xa = x + xp;
+                if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+                pixels[xa + ya * width] = sprite.pixels[x + y * sprite.getWidth()];
+            }
+        }
+    }
     public  void renderTile(int xp, int yp, Tile tile){
         xp -= xOffset;
         yp -= yOffset;
@@ -39,6 +54,36 @@ public class Screen {
                 if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
                 if ( xa < 0 ) xa = 0;
                 pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+            }
+        }
+    }
+
+    public  void renderTile(int xp, int yp, Sprite sprite){
+        xp -= xOffset;
+        yp -= yOffset;
+        for (int y = 0; y < sprite.SIZE; y++){
+            int ya = y + yp;
+            for (int x = 0; x < sprite.SIZE; x++) {
+                int xa = x + xp;
+                if (xa < -sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
+                if ( xa < 0 ) xa = 0;
+                pixels[xa + ya * width] = sprite.pixels[x + y * sprite.SIZE];
+            }
+        }
+    }
+
+    public  void renderProjectile(int xp, int yp, Projectile projectile){
+        xp -= xOffset;
+        yp -= yOffset;
+        for (int y = 0; y < projectile.getSprite().SIZE; y++){
+            int ya = y + yp;
+            for (int x = 0; x < projectile.getSprite().SIZE; x++) {
+                int xa = x + xp;
+                if (xa < -projectile.getSprite().SIZE || xa >= width || ya < 0 || ya >= height) break;
+                if ( xa < 0 ) xa = 0;
+
+                int col = projectile.getSprite().pixels[x + y * projectile.getSprite().SIZE];
+                if (col != 0xFFFF00FF) pixels[xa + ya * width] = col;
             }
         }
     }

@@ -12,6 +12,7 @@ public class SpriteSheet {
     public static SpriteSheet outside = new SpriteSheet("/textures/city/citytiles.png", 256);
     public static SpriteSheet chracters = new SpriteSheet("/textures/characters/characters_transparent.png", 256);
     public static SpriteSheet spawn_assets = new SpriteSheet("/textures/Assets/SpawnAssets/SpawnAssets.png", 64);
+    public static SpriteSheet wizard_projectile = new SpriteSheet("/textures/Assets/ProjectilesAssets/WizardProjectile.png", 64);
 
     public SpriteSheet(String path, int size) {
         this.path = path;
